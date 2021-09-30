@@ -47,7 +47,7 @@ services:
       - MYSQL_ROOT_PASSWORD=${PASS_ROOT}
       - MYSQL_USER=${USER_DB}
       - MYSQL_PASSWORD=${PASS_DB}
-      - MYSQL_DATABASE=${NAME_DB}
+      - MYSQL_DATABASE=${DB_NAME}
     volumes:
       - ./runtime/db:/var/lib/mysql
 

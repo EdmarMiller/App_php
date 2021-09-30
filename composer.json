@@ -1,4 +1,22 @@
 {
+    "name": "vendor_name/app",
+    "description": "description",
+    "minimum-stability": "stable",
+    "license": "proprietary",
+    "authors": [
+        {
+            "name": "edmar.gabriel",
+            "email": "email@example.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "App\\": "src/"
+        },
+        "files": [
+            "src/helper/helpers.php"
+        ]
+    },
     "require": {
         "vlucas/phpdotenv": "^5.3"
     },
