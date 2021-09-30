@@ -1,9 +1,9 @@
 version: '3'
 
 services:
-  nginx:
+  nginx2:
     image: nginx:latest
-    container_name: nginx
+    container_name: nginx2
     ports:
       - "80:80"
     networks:
@@ -13,16 +13,16 @@ services:
       - ./docker/nginx/conf:/etc/nginx/conf.d
       - ./docker/nginx/logs:/var/log/nginx/
     depends_on:
-      - api
+      - api2
 
-  api:
+  api2:
     build:
       args:
-        user=USER
-        uid=UID
+       user: ${USER}
+       uid: ${UID}
       context: ./docker/php
       dockerfile: Dockerfile
-    container_name: api
+    container_name: api2
     networks:
       - backend
       - db
@@ -32,11 +32,11 @@ services:
       XDEBUG_CONFIG: client_host=172.17.0.1
       PHP_IDE_CONFIG: serverName=localhost
     depends_on:
-      - database
+      - database2
 
-  database:
+  database2:
     image: mariadb
-    container_name: database
+    container_name: database2
     expose:
       - 3306
     ports:
@@ -44,10 +44,10 @@ services:
     networks:
       - db
     environment:
-      - MYSQL_ROOT_PASSWORD=PASS_ROOT
-      - MYSQL_USER=USER_DB
-      - MYSQL_PASSWORD=PASS_DB
-      - MYSQL_DATABASE=NAME_DB
+      - MYSQL_ROOT_PASSWORD=${PASS_ROOT}
+      - MYSQL_USER=${USER_DB}
+      - MYSQL_PASSWORD=${PASS_DB}
+      - MYSQL_DATABASE=${NAME_DB}
     volumes:
       - ./runtime/db:/var/lib/mysql
 
